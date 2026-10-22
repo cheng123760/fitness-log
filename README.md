@@ -26,9 +26,8 @@ GitHub: cheng123760/fitness-log（云端）
 | 本地会话（电脑开机） | ✅ | ✅ 改文件 + git push |
 | 云端会话（手机云端模式） | ✅ 读本仓库 | ❌ GitHub 连接器只读（403） |
 | 你本人（GitHub App / 网页） | ✅ | ✅ 直接编辑文件 |
-| 你本人（腾讯文档账本） | ✅ | ✅ 手机直接改 |
 
-**结论：云端 AI 只能查，不能写。要写入必须走本地会话，或你自己在 GitHub / 腾讯文档上编辑。**
+**结论：云端 AI 只能查，不能写。要写入必须走本地会话，或你自己在 GitHub 上编辑。**
 
 ## 已确定的参数（不要重复询问）
 
@@ -67,4 +66,3 @@ git add -A && git commit -m "daily update YYYY-MM-DD" && git push origin main
 
 - Day 0 = 2026-10-22（基线日，不计入进度评估）
 - 目标：体脂 31.7% → 20%，需减脂 11.7 kg，约 8 个月
-- 腾讯文档账本（手机看数）：https://docs.qq.com/sheet/DVEZ3ZERDVVVxWENT
