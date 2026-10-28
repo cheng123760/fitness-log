@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全身 ABC 训练手册</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f4f5f7;
+    color: #1c1f23;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 20px 16px 80px; }
+
+  header {
+    background: #1c1f23;
+    color: #fff;
+    padding: 32px 20px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  header h1 { font-size: 26px; letter-spacing: -0.5px; margin-bottom: 6px; }
+  header p { font-size: 14px; color: #9aa3ad; }
+  header .meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  header .meta span {
+    font-size: 12px; background: rgba(255,255,255,.12);
+    padding: 4px 10px; border-radius: 20px; color: #d6dbe1;
+  }
+
+  h2 {
+    font-size: 19px; margin: 32px 0 14px; padding-left: 12px;
+    border-left: 4px solid #1c1f23; line-height: 1.4;
+  }
+  h3 { font-size: 16px; margin: 22px 0 10px; }
+
+  .card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+
+  /* 组别配色 */
+  .sA { --c: #2563eb; --cbg: #eff4ff; }
+  .sB { --c: #059669; --cbg: #ecfdf5; }
+  .sC { --c: #d97706; --cbg: #fffbeb; }
+
+  .session-head {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px; border-radius: 14px 14px 0 0;
+    background: var(--c); color: #fff;
+  }
+  .session-head .badge {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(255,255,255,.22);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; flex-shrink: 0;
+  }
+  .session-head h2 {
+    border: none; padding: 0; margin: 0; font-size: 17px; color: #fff;
+  }
+  .session-head small { display: block; font-size: 12px; opacity: .8; font-weight: 400; }
+  .session-body {
+    background: #fff; border-radius: 0 0 14px 14px; padding: 6px 20px 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06); margin-bottom: 26px;
+  }
+  .session-body ol { list-style: none; counter-reset: s; }
+  .session-body li {
+    counter-increment: s; padding: 12px 0; border-bottom: 1px solid #eef0f2;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  }
+  .session-body li:last-child { border-bottom: none; }
+  .session-body li::before {
+    content: counter(s);
+    font-size: 12px; font-weight: 700; color: var(--c);
+    background: var(--cbg); width: 22px; height: 22px; border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-right: 4px;
+  }
+  .session-body li .nm { flex: 1; font-weight: 600; }
+  .session-body li .tg { font-size: 12px; color: #7b8794; white-space: nowrap; }
+
+  /* 动作详解 */
+  .ex { background: #fff; border-radius: 14px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .ex-hd {
+    padding: 14px 18px; border-left: 4px solid var(--c);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ex-hd .no {
+    font-size: 12px; font-weight: 700; color: var(--c);
+    background: var(--cbg); padding: 3px 9px; border-radius: 6px; flex-shrink: 0;
+  }
+  .ex-hd .tt { flex: 1; }
+  .ex-hd .tt b { font-size: 16px; display: block; }
+  .ex-hd .tt i { font-size: 12px; color: #8b959f; font-style: normal; }
+  .ex-bd { padding: 4px 18px 18px; }
+  .row { padding: 10px 0; border-top: 1px solid #f0f2f4; }
+  .row:first-child { border-top: none; }
+  .lbl {
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: #8b959f; display: block; margin-bottom: 5px;
+  }
+  .row p, .row li { font-size: 14px; }
+  .row ul { padding-left: 18px; }
+  .row li { margin-bottom: 4px; }
+  .warn .lbl { color: #dc2626; }
+  .warn li { color: #b91c1c; }
+  .tip { color: #b45309; font-weight: 600; }
+
+  .kbd {
+    display: inline-block; background: #eef0f2; border-radius: 4px;
+    padding: 1px 6px; font-size: 13px; font-weight: 600; color: #1c1f23;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fff; border-radius: 12px; overflow: hidden; }
+  th { background: #1c1f23; color: #fff; text-align: left; padding: 10px 12px; font-size: 13px; font-weight: 600; }
+  td { padding: 10px 12px; border-bottom: 1px solid #eef0f2; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  .note {
+    background: #fffbeb; border-left: 4px solid #f59e0b;
+    padding: 14px 16px; border-radius: 8px; font-size: 14px; margin: 14px 0;
+  }
+  .note b { color: #92400e; }
+  .dark {
+    background: #1c1f23; color: #e6e9ec; border-radius: 12px;
+    padding: 18px 20px; font-size: 14px; margin: 14px 0;
+  }
+  .dark b { color: #fff; }
+
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .toc a {
+    text-decoration: none; font-size: 13px; padding: 8px 14px;
+    background: #fff; color: #1c1f23; border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.06); font-weight: 600;
+  }
+  .toc a.a { border-left: 3px solid #2563eb; }
+  .toc a.b { border-left: 3px solid #059669; }
+  .toc a.c { border-left: 3px solid #d97706; }
+
+  @media (max-width: 520px) {
+    .session-body li { flex-wrap: wrap; }
+    .session-body li .tg { font-size: 11px; }
+    .ex-hd .tt i { display: none; }
+    header h1 { font-size: 22px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .ex, .session-body { box-shadow: none; border: 1px solid #ddd; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>全身 ABC 训练手册</h1>
+  <p>每周 3 次 · 单次 50 min 力量 + 40 min 坡走</p>
+  <div class="meta">
+    <span>周一 A / 周三 B / 周六 C</span>
+    <span>每动作 3 组 × 8–12 次</span>
+    <span>组间休息 90 秒</span>
+    <span>2026-10-27 建档</span>
+  </div>
+</header>
+
+<div class="toc">
+  <a href="#how" style="border-left:3px solid #6b7280">使用说明</a>
+  <a href="#warm" class="a">热身流程</a>
+  <a href="#dayA" class="a">A 日</a>
+  <a href="#dayB" class="b">B 日</a>
+  <a href="#dayC" class="c">C 日</a>
+  <a href="#log">记录表</a>
+</div>
+
+<h2 id="how">使用说明（先看这 3 条）</h2>
+
+<div class="card">
+  <div class="row">
+    <span class="lbl">1. 每个动作留 2–3 次余力</span>
+    <p>一组做到「<b>还能再做 2–3 次，但就此停下</b>」，这叫 RIR 2–3。新手最容易犯的错是数到 12 就停——如果你做到 12 次时还有一半力气，那重量太轻了。</p>
+  </div>
+  <div class="row">
+    <span class="lbl">2. 什么时候加重量</span>
+    <p><b>同一个重量连续 2 次训练都能做到 12 次</b> → 加重量（上肢 +2.5 kg、下肢 +5 kg），次数回到 8 次重新爬。<br>这就是「渐进超负荷」，整套方案里唯一真正驱动效果的东西。</p>
+  </div>
+  <div class="row">
+    <span class="lbl">3. 每次必须记下来</span>
+    <p>记 <span class="kbd">重量 × 次数 × 组数</span>。这份记录比体重秤重要得多——<b>它是判断「有没有掉肌肉」最灵敏的指标</b>。重量在涨，说明肌肉在，哪怕体重没动。</p>
+  </div>
+</div>
+
+<div class="note">
+  <b>为什么是 A/B/C 三套而不是一套反复：</b>同一个动作每周做 3 次、连做几个月，肩和腰最容易累积劳损；而且深蹲 / 罗马尼亚硬拉 / 腿举对腿的刺激角度完全不同。三套轮换既是换角度，也是换心情。
+</div>
+
+<h2 id="warm">热身流程（8 分钟，别省）</h2>
+
+<div class="card">
+  <table>
+    <tr><th style="width:110px">顺序</th><th>内容</th></tr>
+    <tr><td>1. 升温</td><td>椭圆机 / 快走 / 划船机 5 分钟，到微微出汗</td></tr>
+    <tr><td>2. 活动关节</td><td>髋关节环绕 10 次/侧、肩关节环绕 10 次/向、猫牛式 10 次</td></tr>
+    <tr><td>3. 第一个动作</td><td>用空杆或 50% 重量做 2 组 × 10 次递增热身，再上正式组</td></tr>
+  </table>
+  <div class="row" style="margin-top:12px">
+    <p><b>不要做静态拉伸。</b>训练前静态拉伸会短暂降低力量输出 5–8%，拉伸放在练完或单独一天。</p>
+  </div>
+</div>
+
+<!-- ============ A ============ -->
+<h2 id="dayA">周一 · 全身 A</h2>
+
+<div class="sA">
+  <div class="session-head">
+    <div class="badge">A</div>
+    <div><h2>全身 A<small>腿（股四主导）+ 水平推 + 水平拉 + 肩中束 + 核心</small></h2></div>
+  </div>
+  <div class="session-body">
+    <ol>
+      <li><span class="nm">深蹲</span><span class="tg">股四头 / 臀</span></li>
+      <li><span class="nm">卧推</span><span class="tg">胸 / 前三角 / 三头</span></li>
+      <li><span class="nm">坐姿划船</span><span class="tg">背阔 / 中背</span></li>
+      <li><span class="nm">哑铃侧平举</span><span class="tg">肩中束</span></li>
+      <li><span class="nm">卷腹</span><span class="tg">腹直肌</span></li>
+    </ol>
+  </div>
+</div>
+
+<div class="sA">
+<div class="ex">
+  <div class="ex-hd"><span class="no">A1</span><div class="tt"><b>深蹲</b><i>Back Squat / Goblet Squat</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>杠铃放在斜方肌上部（高杠位）；双脚与肩同宽，<b>脚尖外展 15–30°</b>；挺胸、核心收紧。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>吸气、收紧核心 → <b>屈髋和屈膝同时进行</b>，不是先屈膝</li>
+      <li>下蹲过程中<b>膝盖始终沿脚尖方向外推</b>，别内扣</li>
+      <li>蹲到大腿与地面平行或略低，脚掌三点（大脚趾、小脚趾、脚跟）均匀踩实</li>
+      <li>呼气站起，髋和膝同步伸展</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>脚跟离地</b> → 踝背屈活动度不足，临时在脚跟垫 1–2 cm 杠铃片</li>
+      <li><b>膝盖内扣</b> → 主动想「把地面掰开」</li>
+      <li><b>下背弯曲（"眨眼"）</b> → 蹲太深了，先练到平行为止</li>
+      <li>蹲太浅，几乎没下就起</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>空杆 20 kg 起。<b>没有杠铃就做高脚杯深蹲</b>（双手抱一个哑铃或壶铃在胸前，12–16 kg），对新手更友好，学动作更快。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">A2</span><div class="tt"><b>卧推</b><i>Bench Press</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><ul>
+      <li><b>肩胛骨后缩下沉、牢牢贴住凳面</b>（这一步决定肩安全）</li>
+      <li>双脚踩实地面，臀部不离凳</li>
+      <li>握距略宽于肩，杠铃下放时前臂应垂直地面</li>
+    </ul></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>下放到<b>乳头连线位置</b>，肘与躯干夹角约 45–75°（不要 90° 完全外展）</li>
+      <li>推起时脚蹬地、肩胛保持后缩，胸口略向上顶</li>
+      <li>顶端不锁死肘关节</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>肩胛前伸（含胸）</b> → 肩关节前侧压力剧增，最常见的肩伤来源</li>
+      <li><b>肘部完全外展 90°</b> → 肩峰撞击风险</li>
+      <li>臀部离凳拱成桥、杠铃弹胸</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>空杆 20 kg 起。<b>没器械就做哑铃卧推</b>（每只 12–16 kg）或标准俯卧撑，效果不打折。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">A3</span><div class="tt"><b>坐姿划船</b><i>Seated Cable Row</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>坐稳，脚踩踏板，膝盖微屈；脊柱中立（不弓不塌），手臂伸直但肩不放松。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><span class="tip">关键顺序：先收肩胛，再拉手臂。</span>先把肩胛骨向后夹，再让肘部沿身体两侧往后拉</li>
+      <li>手柄拉到腹部，肘部贴近身体</li>
+      <li>回放要慢（3 秒），让肩胛骨向前伸展、背阔拉开</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>只用胳膊拉</b>，背部完全没参与 → 你练的是二头不是背</li>
+      <li>身体前后大幅摆动，用惯性甩</li>
+      <li>耸肩（斜方肌代偿）</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>20–30 kg 起。新手找感觉可以先做「直臂下拉」，只感受背阔发力。替代：哑铃单臂划船、器械划船。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">A4</span><div class="tt"><b>哑铃侧平举</b><i>Lateral Raise</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>站立，哑铃垂于体侧，<b>肘关节微屈 10–15°</b>（保持这个角度不变），上身略前倾。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><span class="tip">肘部领先，手在肘之后</span>——像倒水一样，手腕略低于肘</li>
+      <li>抬到与肩同高就停，<b>不要举过头</b></li>
+      <li>下放 3 秒，控制住</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>重量太大靠身体甩上去</b> → 这个动作几乎所有人都用太重，是最典型的问题</li>
+      <li>耸肩，变成斜方肌训练</li>
+      <li>抬过肩高（超过 90° 后中束不再参与）</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p><b>男 4–8 kg/只，宁轻勿重。</b>能做 12 次且完全不甩，就是合适的重量。替代：弹力带侧平举、绳索侧平举。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">A5</span><div class="tt"><b>卷腹</b><i>Crunch</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>仰卧，膝屈约 90°，双脚踩地；双手交叉胸前，或轻扶耳侧（<b>不发力</b>）。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>呼气时<b>脊柱逐节卷起</b>，只有肩胛骨离地——不是整个上半身坐起来</li>
+      <li>顶端停 1 秒，感受腹肌挤压</li>
+      <li>吸气缓慢回落，肩不着地即接下一次</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>手拉脖子</b> → 颈椎受压</li>
+      <li>做成完整的仰卧起坐 → 那是屈髋（髂腰肌主导），不是练腹</li>
+      <li>靠惯性甩起来</li>
+    </ul></div>
+    <div class="row"><span class="lbl">组数</span><p>3 组 × 12–15 次。核心是小肌群，次数可以略高。</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ============ B ============ -->
+<h2 id="dayB">周三 · 全身 B</h2>
+
+<div class="sB">
+  <div class="session-head">
+    <div class="badge">B</div>
+    <div><h2>全身 B<small>腿（臀 / 股二主导）+ 垂直推 + 垂直拉 + 二头 + 核心</small></h2></div>
+  </div>
+  <div class="session-body">
+    <ol>
+      <li><span class="nm">罗马尼亚硬拉</span><span class="tg">臀 / 股二头</span></li>
+      <li><span class="nm">坐姿哑铃推肩</span><span class="tg">前三角 / 三头</span></li>
+      <li><span class="nm">高位下拉</span><span class="tg">背阔肌</span></li>
+      <li><span class="nm">哑铃弯举</span><span class="tg">肱二头</span></li>
+      <li><span class="nm">悬垂举腿</span><span class="tg">腹直肌下部</span></li>
+    </ol>
+  </div>
+</div>
+
+<div class="sB">
+<div class="ex">
+  <div class="ex-hd"><span class="no">B1</span><div class="tt"><b>罗马尼亚硬拉</b><i>Romanian Deadlift</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>站姿，杠铃/哑铃在体前贴腿；<b>膝关节微屈 15–20°，而且全程这个角度固定不变</b>——这是它和深蹲的根本区别。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><span class="tip">核心动作是「髋部向后推」</span>——想象用屁股去关一扇车门</li>
+      <li>杠铃贴着小腿、大腿下滑，越近越好</li>
+      <li>下到腘绳肌（大腿后侧）有<b>明显牵拉感</b>为止，一般杠铃过膝到小腿中部</li>
+      <li>臀部发力向前顶，回到站直，不要过度后仰</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>做成深蹲</b> → 膝盖弯太多，股四头抢走全部负荷</li>
+      <li><b>弓背</b> → 腰椎风险最大的错误，重量宁轻</li>
+      <li>杠铃离身体太远（杠杆变长，腰承受翻倍压力）</li>
+      <li>下太深超过柔韧极限</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>空杆或 40 kg 起。<b>这个动作重量涨得比深蹲快，但千万别贪</b>——它是腰最容易受伤的动作。替代：器械腿弯举、臀桥。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">B2</span><div class="tt"><b>坐姿哑铃推肩</b><i>Seated Dumbbell Shoulder Press</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>靠背调到 <b>80–85°</b>（接近直立）；哑铃举到肩两侧，肘在手腕正下方，掌心向前或略相对。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>向上推到头几乎伸直，<b>不锁死肘</b></li>
+      <li>下放到肘略低于肩，感受三角肌拉长</li>
+      <li>全程核心收紧，肋骨不要翘起</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>腰过度后仰</b> → 这个动作就变成了上斜卧推，肩的负荷被偷走</li>
+      <li>下放太浅（只做四分之一程）</li>
+      <li>耸肩</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>10–14 kg/只。替代：器械推肩（对新手更安全）、站姿杠铃推举（进阶）。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">B3</span><div class="tt"><b>高位下拉</b><i>Lat Pulldown</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>坐稳，大腿卡在固定垫下（防止被拉起来）；握距略宽于肩，正握。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><span class="tip">先下沉肩胛，再拉</span>——不要一上手就弯手臂</li>
+      <li>把横杆拉到锁骨 / 上胸位置，肘部向下向后</li>
+      <li>回放 3 秒，让背阔完全伸展</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>身体大幅后仰</b>，用体重把杆拉下来（变成划船）</li>
+      <li><b>拉到颈后</b> → 肩关节被迫极度外旋，无收益且伤肩</li>
+      <li>只用手臂，背部没参与</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>30–40 kg 起。替代：辅助引体向上、器械下拉。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">B4</span><div class="tt"><b>哑铃弯举</b><i>Dumbbell Curl</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>站立，哑铃垂于体侧，掌心向前；<b>肘关节固定在身体两侧</b>，这是全程唯一不能动的关节。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>只做前臂屈曲，肘不前后移动</li>
+      <li>顶端稍旋外（小指略高于拇指），二头收缩更充分</li>
+      <li><b>下放 3 秒</b>，离心阶段是长肌肉的主要环节</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>甩身体借力</b></li>
+      <li>肘部前后移动（变成前平举）</li>
+      <li><b>下放太快</b> → 等于扔掉一半效果</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>8–12 kg/只。替代：杠铃弯举、绳索弯举。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">B5</span><div class="tt"><b>悬垂举腿</b><i>Hanging Leg Raise</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>双手握单杠悬垂，<b>肩胛微收（不要完全放松挂着）</b>。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><span class="tip">关键是先骨盆后倾，再抬腿</span>——是把骨盆卷起来，不是单纯抬大腿</li>
+      <li>抬到腿与地面平行或更高，缓慢下放</li>
+      <li>下放时不要让身体前后摆动</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>只抬大腿不卷骨盆</b> → 练的是髂腰肌（髋屈肌），不是腹肌。这是这个动作最大的误区</li>
+      <li>用摆动惯性把腿荡上去</li>
+    </ul></div>
+    <div class="row"><span class="lbl">替代</span><p>做不动就做<b>屈膝悬垂举腿</b>（膝盖弯着抬）或仰卧举腿，效果一样，门槛低得多。</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ============ C ============ -->
+<h2 id="dayC">周六 · 全身 C</h2>
+
+<div class="sC">
+  <div class="session-head">
+    <div class="badge">C</div>
+    <div><h2>全身 C<small>腿（器械）+ 上斜推 + 垂直拉（引体）+ 三头 + 核心抗伸展</small></h2></div>
+  </div>
+  <div class="session-body">
+    <ol>
+      <li><span class="nm">腿举</span><span class="tg">股四头 / 臀</span></li>
+      <li><span class="nm">上斜卧推</span><span class="tg">上胸</span></li>
+      <li><span class="nm">辅助引体向上</span><span class="tg">背阔肌</span></li>
+      <li><span class="nm">绳索三头下压</span><span class="tg">肱三头</span></li>
+      <li><span class="nm">平板支撑</span><span class="tg">核心抗伸展</span></li>
+    </ol>
+  </div>
+</div>
+
+<div class="sC">
+<div class="ex">
+  <div class="ex-hd"><span class="no">C1</span><div class="tt"><b>腿举</b><i>Leg Press</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>坐进器械，<b>背部和臀部完全贴住靠背</b>；双脚与肩同宽，放在踏板中部（放太高会变成臀主导）。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>下放到膝关节约 90°——<b>以腰不离靠背为界限</b>，这是唯一标准</li>
+      <li>脚掌均匀发力推起，膝盖不锁死</li>
+      <li>膝盖沿脚尖方向，不内扣</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>下放太深导致骨盆后倾、腰离开靠背</b> → 腰椎剪切力极大，是这个器械最主要的受伤方式</li>
+      <li>膝盖内扣</li>
+      <li>顶端锁死膝关节</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>以器械刻度为准，从能标准完成 12 次的重量起。替代：哈克深蹲、高脚杯深蹲。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">C2</span><div class="tt"><b>上斜卧推</b><i>Incline Bench Press</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>凳角 <b>30–45°</b>；<b>超过 45° 就变成推肩了</b>，上胸的刺激反而减少。其余同平卧推（肩胛后缩下沉）。</p></div>
+    <div class="row"><span class="lbl">执行</span><p>杠铃下放到<b>锁骨下方 / 上胸位置</b>，推起路径略向后上（不是垂直向上）。</p></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li>角度调太高（>45°）</li>
+      <li>下放位置太靠下（变成平卧推）</li>
+      <li>肩胛前伸</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量</span><p><b>比平卧推轻 10–20%</b>，这是正常的，不要以为自己退步了。替代：上斜哑铃卧推。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">C3</span><div class="tt"><b>辅助引体向上</b><i>Assisted Pull-up</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>辅助器械（配重块托膝）或长弹力带辅助；握距略宽于肩，掌心朝前。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><span class="tip">先下沉肩胛</span>，再开始弯臂</li>
+      <li>肘部向身体两侧下方拉，拉到下巴过杆</li>
+      <li><b>下放 3 秒</b>——离心阶段是引体增长力量最快的部分</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li>耸肩起（斜方代偿）</li>
+      <li>只做上半程</li>
+      <li>辅助重量设错：<b>做不动就加辅助，做太轻松就减辅助</b>，目标是「刚好能做 8–12 次」</li>
+    </ul></div>
+    <div class="row"><span class="lbl">进阶路径</span><p>辅助重量逐步减少 → 最终做自重引体。<b>这是唯一一个以「减少配重」为进步的器械</b>，别记成加重量。替代：高位下拉。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">C4</span><div class="tt"><b>绳索三头下压</b><i>Triceps Pushdown</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>站在绳索机前，<b>肘关节紧贴体侧固定</b>，前臂约 90°，上身略前倾。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li><b>只有前臂在动</b>，把绳索下压到底</li>
+      <li>底端两手略向外分开，顶端停 1 秒</li>
+      <li>回放 3 秒到 90°</li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>肘部前后摆动</b>（变成划船或下压混合）</li>
+      <li>身体前倾用体重压下去</li>
+      <li>上臂不固定</li>
+    </ul></div>
+    <div class="row"><span class="lbl">重量 / 替代</span><p>20–30 kg。替代：哑铃颈后臂屈伸、窄距俯卧撑。</p></div>
+  </div>
+</div>
+
+<div class="ex">
+  <div class="ex-hd"><span class="no">C5</span><div class="tt"><b>平板支撑</b><i>Plank</i></div></div>
+  <div class="ex-bd">
+    <div class="row"><span class="lbl">起始姿势</span><p>前臂撑地，<b>肘在肩正下方</b>；双脚略分开（比并拢稳）。</p></div>
+    <div class="row"><span class="lbl">执行</span><ul>
+      <li>三个收紧同时做：<b>骨盆后倾 + 臀部夹紧 + 腹肌收紧</b></li>
+      <li>身体从肩到脚踝一条直线，正常呼吸不憋气</li>
+      <li><span class="tip">30–45 秒为准，超过 60 秒收益急剧递减</span></li>
+    </ul></div>
+    <div class="row warn"><span class="lbl">常见错误</span><ul>
+      <li><b>塌腰</b> → 最常见，此时腰椎在承压，立刻停</li>
+      <li>撅臀（省力做法，等于没练）</li>
+      <li>憋气</li>
+    </ul></div>
+    <div class="row"><span class="lbl">组数</span><p>3 组 × 30–45 秒。<b>能做 2 分钟不代表核心强，只代表你换了更省力的姿势。</b>想进阶就做单臂单腿的变式，不是延长时间。</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 记录 ============ -->
+<h2 id="log">训练记录表（打印或抄到手机备忘录）</h2>
+
+<div class="card">
+  <table>
+    <tr>
+      <th style="width:26%">动作</th><th style="width:22%">重量</th><th style="width:22%">次数</th><th>组数 / 备注</th>
+    </tr>
+    <tr><td>A1 深蹲</td><td></td><td></td><td>3 × ___</td></tr>
+    <tr><td>A2 卧推</td><td></td><td></td><td>3 × ___</td></tr>
+    <tr><td>A3 坐姿划船</td><td></td><td></td><td>3 × ___</td></tr>
+    <tr><td>A4 侧平举</td><td></td><td></td><td>3 × ___</td></tr>
+    <tr><td>A5 卷腹</td><td></td><td></td><td>3 × ___</td></tr>
+  </table>
+</div>
+
+<div class="dark">
+  <b>每次训练只需要记住三件事：</b><br>
+  1. 上次这个动作做了多重、做了几次？<br>
+  2. 今天能不能多做 1 次，或者加 2.5 kg？<br>
+  3. 每个动作留 2–3 次余力收工。<br><br>
+  <b>其他都不重要。</b>动作好看、组数多、练得累——都不如「重量每周在涨」这一条。你现在在热量缺口里练，力量能保持住甚至小涨，就说明肌肉没掉。
+</div>
+
+<div class="note">
+  <b>明天（10/28 周三）第一次就做 A。</b>之后 周六 B、下周一 C、下周三 A。<br>
+  <b>第一个月重量宁轻勿重</b>，目标是让动作定型、让身体适应，不是把力气用光。第 3–4 周开始你自然会想加重量，那时候再加。
+</div>
+
+</div>
+</body>
+</html>
